@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../layouts/Header.astro";
+import Footer from "../layouts/Footer.astro";
+import ContactForm from "../components/ContactForm.astro";
+import BannerHero from "../components/BannerHero.astro";
+import BannerWoman from "../assets/Banner-woman.jpg";
+---
+
+<Header />
+<Layout>
+  <BannerHero video="BannerHeroContact" />
+  <section class="w-full container mx-auto">
+    <div class="grid gird-col-1 mx-auto w-4/5 m-5">
+      <h1 class="text-blue-500 font-medium text-7xl mb-3">Sign Up</h1>
+      <h4 class="text-gray-500 font-normal text-md">
+        We will contact you very soon
+      </h4>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 mx-auto w-4/5">
+      <div class="col-span-2 w-full p-2">
+        <ContactForm />
+      </div>
+      <div class="hidden md:block self-end w-full">
+        <img class="w-96 -mt-15 mb-0" src={BannerWoman.src} alt="" />
+      </div>
+    </div>
+  </section>
+</Layout>
+<Footer />

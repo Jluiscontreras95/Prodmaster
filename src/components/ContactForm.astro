@@ -1,0 +1,135 @@
+---
+const errors = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  zipCode: "",
+  invitedBy: "",
+};
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+    const email = data.get("email");
+    const zipCode = data.get("zipCode");
+    const invitedBy = data.get("invitedBy");
+
+    if (typeof firstName !== "string" || firstName.length < 1) {
+      errors.firstName += "Please enter a firstName. ";
+    }
+    if (typeof lastName !== "string" || lastName.length < 1) {
+      errors.lastName += "Please enter a lastName. ";
+    }
+    if (typeof email !== "string" || email.length < 1) {
+      errors.email += "Please enter a email. ";
+    }
+    if (typeof zipCode !== "number") {
+      errors.zipCode += "Please enter a zipCode. ";
+    }
+    if (typeof invitedBy !== "string" || invitedBy.length < 1) {
+      errors.invitedBy += "Please enter a invitedBy. ";
+    }
+
+    console.log(data);
+
+    // const hasErrors = Object.values(errors).some(msg => msg)
+    // if (!hasErrors) {
+    //   await registerUser({name, email, password});
+    //   return Astro.redirect("/login");
+    // }
+
+    // Do something with the data
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<div class="mx-auto">
+  <form class="mx-auto" method="POST">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <label
+        for="firstName"
+        class="block mb-2 text-sm font-medium text-black dark:text-white"
+      >
+        First name:
+        <input
+          class="bg-blue-100 border p-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:border-blue-500"
+          type="text"
+          name="firstName"
+          required
+        />
+      </label>
+      {errors.firstName && <p>{errors.firstName}</p>}
+      <label
+        for="lastName"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+        Last name:
+        <input
+          class="p-4 bg-blue-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:border-blue-500"
+          type="text"
+          name="lastName"
+          required
+        />
+      </label>
+      {errors.lastName && <p>{errors.lastName}</p>}
+    </div>
+    <div class="grid grid-col-1">
+      <div class="mb-4">
+        <label class="mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Correo electrónico:
+        </label>
+        <input
+          class="bg-blue-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-4 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:border-blue-500"
+          type="email"
+          name="email"
+          required
+        />
+        {errors.email && <p>{errors.email}</p>}
+      </div>
+    </div>
+    <div class="grid grid-col-1">
+      <div class="mb-4">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Zip code:
+        </label>
+        <input
+          class="bg-blue-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-4 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:border-blue-500"
+          type="number"
+          name="zipCode"
+          required
+        />
+        {errors.zipCode && <p>{errors.zipCode}</p>}
+      </div>
+    </div>
+    <div class="grid grid-col-1">
+      <div class="mb-4">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Invited by:
+        </label>
+        <input
+          class="bg-blue-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-4 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:border-blue-500"
+          type="text"
+          name="invitedBy"
+          required
+        />
+        {errors.invitedBy && <p>{errors.invitedBy}</p>}
+      </div>
+    </div>
+    <div class="grid grid-col-1 mb-4 w-full">
+      <button
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >Enviar</button
+      >
+    </div>
+  </form>
+</div>

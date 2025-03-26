@@ -1,0 +1,49 @@
+---
+const { video } = Astro.props;
+
+let Banner;
+
+if (video === "BannerHeroHome") {
+  Banner = await import("../assets/Video-Banner.mp4").then(
+    (mod) => mod.default
+  );
+} else if (video === "BannerHeroContact") {
+  Banner = await import("../assets/Video-Banner-2.mp4").then(
+    (mod) => mod.default
+  );
+} else {
+  Banner = await import("../assets/Video-Banner.mp4").then(
+    (mod) => mod.default
+  ); // Valor predeterminado
+}
+---
+
+{
+  video === "BannerHeroHome" ? (
+    <div>
+      <video
+        class="w-full aspect-video rounded-2xl"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src={Banner} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  ) : (
+    <div>
+      <video
+        class="w-full aspect-video  rounded-t-3xl"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src={Banner} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  )
+}

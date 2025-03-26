@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BannerHero from "../components/BannerHero.astro";
+import Header from "../layouts/Header.astro";
+import Footer from "../layouts/Footer.astro";
+---
+
+<Header />
+<Layout>
+  <section>
+    <div class="grid">
+      <BannerHero video="BannerHeroHome" />
+      <div class="button-container">
+        <a
+          href="/about-us"
+          class="animate-slide-in-bottom animate-delay-300 animate-duration-slow text-white hover:text-white border border-white hover:bg-blue-600 hover:border-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300s rounded-full text-md text-sm md:text-2xl font-normal px-5 py-2.5 text-center"
+        >
+          Sign Up
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+<Footer />
+
+<style>
+  @keyframes slideDownFromMiddle {
+    0% {
+      transform: translateY(-50vh);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .button-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10vh;
+    animation: slideDownFromMiddle 1.5s ease-out forwards;
+  }
+</style>
